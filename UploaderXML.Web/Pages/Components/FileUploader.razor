@@ -1,0 +1,18 @@
+﻿<div class="col-md-8" style="margin: 0 auto;">
+    <div class="row">
+        <div class="col p-3">
+            <RadzenCard>
+                <h4 class="mb-4">Convert XML to JSON</h4>
+                <RadzenUpload @ref="upload" Auto="false" Url="@GetUrl()" Change="OnChange"
+                              Progress="OnProgress" Complete="OnComplete" Error="UploadError" Class="w-100" />
+                <div class="col-md-12 m-1">
+                    <RadzenTextArea Disabled="true" @bind-Value=@apiResponse Rows="15" Style="width: 100%" />
+                </div>
+                <div class="col-md-12">
+                    <RadzenProgressBar Value="@progress" Visible="@(progress > 0)" />
+                </div>
+                <RadzenButton Text="Upload" Click=@(args => upload.Upload()) class="d-block mt-4" />
+            </RadzenCard>
+        </div>
+    </div>
+</div>

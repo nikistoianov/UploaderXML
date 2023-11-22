@@ -1,0 +1,30 @@
+﻿@inherits LayoutComponentBase
+
+<RadzenDialog />
+<RadzenNotification />
+<RadzenTooltip />
+<RadzenContextMenu />
+
+<div class="main">
+    <div class="content px-1">
+        <ErrorBoundary @ref="errorBoundary">
+            <ChildContent>
+                @Body
+            </ChildContent>
+            <ErrorContent Context="Exception" >
+                <RadzenAlert Title="@Exception.GetType().ToString()" AlertStyle="AlertStyle.Danger" Variant="Variant.Flat" Shade="Shade.Lighter" AllowClose="false">
+                    <div class="row content">
+                        @Exception.Message
+                    </div>
+                    <div class="row content">
+                        <RadzenButton Click=@(() => errorBoundary.Recover()) Text="Close" ButtonStyle="ButtonStyle.Danger" />
+                    </div>
+                </RadzenAlert>
+            </ErrorContent>
+        </ErrorBoundary>
+    </div>
+</div>
+
+@code {
+    private ErrorBoundary errorBoundary;
+}
