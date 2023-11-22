@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UploaderXML.Api", "UploaderXML.Api\UploaderXML.Api.csproj", "{7F15B81D-DC95-4694-A93A-CECBF400B0DC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UploaderXML.Tests", "UploaderXML.Tests\UploaderXML.Tests.csproj", "{1268A5CA-9E5C-45C5-94D5-68E9DFAAA31B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7F15B81D-DC95-4694-A93A-CECBF400B0DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F15B81D-DC95-4694-A93A-CECBF400B0DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F15B81D-DC95-4694-A93A-CECBF400B0DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1268A5CA-9E5C-45C5-94D5-68E9DFAAA31B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1268A5CA-9E5C-45C5-94D5-68E9DFAAA31B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1268A5CA-9E5C-45C5-94D5-68E9DFAAA31B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1268A5CA-9E5C-45C5-94D5-68E9DFAAA31B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
