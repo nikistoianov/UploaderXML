@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Text;
 using System.Xml;
+using UploaderXML.Api.BOs;
 using UploaderXML.Api.Constants;
 using UploaderXML.Api.DTOs;
 
@@ -8,6 +9,13 @@ namespace UploaderXML.Api.Services
 {
     public class FileService : IFileService
     {
+        private readonly IFileWriter fileWriter;
+
+        public FileService(IFileWriter fileWriter)
+        {
+            this.fileWriter = fileWriter;
+        }
+
         public async Task<FileUploadResponseDto> PostFileAsync(IFormFile fileData, string savePath, bool overwriteExistingFile)
         {
             var result = new FileUploadResponseDto();
@@ -55,19 +63,18 @@ namespace UploaderXML.Api.Services
         {
             var fullPath = Path.Combine(fileDetails.FilePath, fileDetails.FileName);
 
-            if (File.Exists(fullPath))
+            if (fileWriter.FileExists(fullPath))
             {
-                File.Delete(fullPath);
+                fileWriter.FileDelete(fullPath);
             }
 
-            if (!string.IsNullOrEmpty(fileDetails.FilePath) && !Directory.Exists(fileDetails.FilePath))
+            if (!string.IsNullOrEmpty(fileDetails.FilePath) && !fileWriter.DirectoryExists(fileDetails.FilePath))
             {
-                Directory.CreateDirectory(fileDetails.FilePath);
+                fileWriter.CreateDirectory(fileDetails.FilePath);
             }
 
-            using var fileStream = File.Create(fullPath);
             var content = new UTF8Encoding(true).GetBytes(fileDetails.JsonText);
-            await fileStream.WriteAsync(content);
+            await fileWriter.WriteAsync(fullPath, content);
         }
 
         private bool IsValidXml(Stream fileStream, out XmlDocument document)
@@ -88,7 +95,7 @@ namespace UploaderXML.Api.Services
         private bool ValidateFileDetails(FileDetailsDto fileDetails)
         {
             var fullPath = Path.Combine(fileDetails.FilePath, fileDetails.FileName);
-            if (!fileDetails.OverwriteExistingFile && File.Exists(fullPath))
+            if (!fileDetails.OverwriteExistingFile && fileWriter.FileExists(fullPath))
             {
                 return false;
             }
