@@ -1,9 +1,9 @@
-﻿using UploaderXML.Api.Models;
+﻿using UploaderXML.Api.DTOs;
 
 namespace UploaderXML.Api.Services
 {
     public interface IFileService
     {
-        public Task<FileUploadResponseModel> PostFileAsync(IFormFile fileData, string savePath, bool overwriteExistingFile);
+        public Task<FileUploadResponseDto> PostFileAsync(IFormFile fileData, string savePath, bool overwriteExistingFile);
     }
 }

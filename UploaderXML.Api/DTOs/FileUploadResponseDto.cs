@@ -1,8 +1,10 @@
-﻿namespace UploaderXML.Api.Models
+﻿namespace UploaderXML.Api.DTOs
 {
-    public class FileUploadResponseModel
+    public class FileUploadResponseDto
     {
         public string ExceptionMessage { get; set; }
+
+        public string JsonText { get; set; }
 
         public string ValidationError { get; set; }
 

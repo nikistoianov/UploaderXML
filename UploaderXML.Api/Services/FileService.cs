@@ -3,17 +3,22 @@ using System.Text;
 using System.Xml;
 using UploaderXML.Api.Constants;
 using UploaderXML.Api.DTOs;
-using UploaderXML.Api.Models;
 
 namespace UploaderXML.Api.Services
 {
     public class FileService : IFileService
     {
-        public async Task<FileUploadResponseModel> PostFileAsync(IFormFile fileData, string savePath, bool overwriteExistingFile)
+        public async Task<FileUploadResponseDto> PostFileAsync(IFormFile fileData, string savePath, bool overwriteExistingFile)
         {
-            var result = new FileUploadResponseModel();
+            var result = new FileUploadResponseDto();
             try
             {
+                if (fileData == null)
+                {
+                    result.ValidationError = ValidationErrors.NoFile;
+                    return result;
+                };
+
                 var fileDetails = new FileDetailsDto()
                 {
                     FileName = $"{fileData.FileName}.json",
@@ -36,6 +41,7 @@ namespace UploaderXML.Api.Services
                 fileDetails.JsonText = JsonConvert.SerializeXmlNode(document, Newtonsoft.Json.Formatting.Indented);
 
                 await CreateFile(fileDetails);
+                result.JsonText = fileDetails.JsonText;
             }
             catch (Exception ex)
             {

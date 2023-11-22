@@ -30,7 +30,7 @@ namespace UploaderXML.Api.Controllers
                 return InternalServerError(response.ExceptionMessage);
             }
 
-            return Ok("Success!");
+            return Ok(response.JsonText);
         }
 
         protected ActionResult InternalServerError(string message)
